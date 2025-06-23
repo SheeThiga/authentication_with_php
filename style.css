@@ -5,10 +5,16 @@
   box-sizing: border-box;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
+body {
+  background-color: #e2d7f7;
+}
+
 .msg {
   color: red;
   font-size: 18px;
 }
+
 .form {
   display: flex;
   align-items: center;
@@ -16,6 +22,7 @@
   min-height: 100vh;
   background: #e2d7f7;
 }
+
 .form form {
   background-color: rgb(244, 244, 244);
   text-align: center;
@@ -24,38 +31,50 @@
   padding: 2rem;
   width: 28rem;
 }
+
 .form form h2 {
   margin-bottom: 1.5rem;
 }
-.form form input {
+
+.form form input,
+select {
   padding: 10px 15px;
   font-size: 15px;
   width: 100%;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
+
 .form form button {
   margin-top: 10px;
   width: 100%;
   background-color: #783595;
   color: white;
-  font-size: 18px;
+  font-size: 15px;
+  padding: 10px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
+
 .form form p {
   font-size: 15px;
   margin-top: 8px;
 }
-body {
-  background-color: #e2d7f7;
-}
+
 .user-page {
   text-align: center;
   margin-top: 15rem;
   background-color: white;
   padding: 1rem;
 }
+
 .user-page p {
   font-size: 18px;
   margin-top: 2rem;
 }
+
 .user-page button {
   background-color: #783595;
   color: white;
