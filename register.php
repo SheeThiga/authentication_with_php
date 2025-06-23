@@ -7,21 +7,31 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $user_type = $_POST['user_type'];
     $password = $_POST['password'];
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     $cpassword = $_POST['cpassword'];
 
-    $select1 = "SELECT * FROM users WHERE email='$email' AND password='$hashed_password'";
-    $select_user = mysqli_query($conn, $select1);
-    if (mysqli_num_rows($select_user) > 0) {
-        $msg = "User already exists!";
+    if ($password !== $cpassword) {
+        $msg = "Passwords do not match!";
     } else {
-        $insert = "INSERT INTO users (`name`, `email`, `user_type`, `password`) VALUES ('$name', '$email', '$user_type', '$hashed_password')";
-        $result = mysqli_query($conn, $insert);
-        header("Location: login.php");
-    }
-};
+        $select1 = "SELECT * FROM users WHERE email='$email'";
+        $select_user = mysqli_query($conn, $select1);
 
+        if (mysqli_num_rows($select_user) > 0) {
+            $msg = "User already exists!";
+        } else {
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $insert = "INSERT INTO users (`name`, `email`, `user_type`, `password`) 
+                       VALUES ('$name', '$email', '$user_type', '$hashed_password')";
+            if (mysqli_query($conn, $insert)) {
+                header("Location: login.php");
+                exit();
+            } else {
+                $msg = "Registration failed. Try again.";
+            }
+        }
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +47,10 @@ if (isset($_POST['submit'])) {
     <div class="form">
         <form action="" method="POST">
             <h2>Registration</h2>
-            <p class="msg"><?php $msg ?></p>
+            <?php if (!empty($msg)) : ?>
+    <p class="msg text-danger font-weight-bold"><?php echo $msg; ?></p>
+<?php endif; ?>
+
             <div class="form-group">
                 <input type="text" name="name" placeholder="Enter your name" class="form-control" required>
             </div>
