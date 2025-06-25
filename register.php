@@ -73,7 +73,7 @@ if (isset($_POST['submit'])) {
                 Register Now
             </button>
             <p>
-                Already have an account? <a href="login.php">Login Now</a>
+                Already have an account? <a href="index.php">Login Now</a>
             </p>
         </form>
 
